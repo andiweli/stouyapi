@@ -38,8 +38,6 @@ We use the directory ``/srv`` in root as a base directory for our OUYA server fi
 
 *NOTE: Using* ``/srv`` *as base directory is just an example. You can put the code anywhere you want; just make sure to use the correct path you use in all configuration files.*
 
-Now first download the stouyapi code and files to your computer.
-
 In a terminal, create a new directory by typing::
 
     # mkdir /srv
@@ -49,6 +47,7 @@ We need permissions on this folder. To get these use::
     # chown pi:pi /srv
     # chmod 755 /srv
 
+Now first download the stouyapi code and files to your Raspberry Pi.
 Go to the new directory. We will store the OUYA data inside this folder::
 
     $ cd /srv

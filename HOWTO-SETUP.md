@@ -234,14 +234,17 @@ Save the file and close.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
-First set the permissions of the new website (not tested so far):
+First add a new group ``ouya`` with your user and the www-data user (so Apache/PHP has full rights and you can still update the folder or access via Samba). Then set the permissions of the new website (not tested so far):
 ```
 sudo groupadd ouya
 sudo usermod -aG ouya <username>
 sudo usermod -aG ouya www-data
-sudo chown -vR :ouya /srv/stouyapi/
-sudo chmod -vR g+w /srv/stouyapi/
+sudo chown -vR www-data:ouya /srv/stouyapi/
+sudo chmod -vR g+rw /srv/stouyapi/
 ```
+
+<img width="585" height="245" alt="image" src="https://github.com/user-attachments/assets/127268c7-1714-434d-b7db-e3ced7d617b6" />
+
 
 > [!NOTE]
 > ``<username>`` is the user you're logging in to your Pi. For me it is the standard ``pi`` user.

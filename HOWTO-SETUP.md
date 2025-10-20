@@ -265,45 +265,52 @@ With that we finish the settings and the site is already running.
 
 To check if everything is ok, type into the terminal:
 
-*To check if normal API routes work, type:*
-```curl -I http://stouyapi.local/api/firmware_builds```
+*To check if normal API routes work, type...*
+```
+curl -I http://stouyapi.local/api/firmware_builds
+```
 
-*To check if rewritten API routes work, type:*
-```curl -I http://stouyapi.local/api/v1/discover/discover```
+*To check if rewritten API routes work, type...*
+```
+curl -I http://stouyapi.local/api/v1/discover/discover
+```
 
-*To check if PHP routes work, type:*
-```curl -I http://stouyapi.local/api/v1/gamers/me```
+*To check if PHP routes work, type...*
+```
+curl -I http://stouyapi.local/api/v1/gamers/me
+```
 
 All curl commands above should return ``HTTP/1.1 200 OK`` with some other information.
 
 
-5 - Configuring the files in the OUYA
-=====================================
+## 5 - Configuring the files in the OUYA
 
 We must access the OUYA through adb, either in the case of an installation after a factory reset or to use the local stouyapi, and edit the hosts file located in /etc (/etc/hosts) and include a line with the format below::
+```IP-APACHE-SERVER STOUYAPI-SITE-NAME```
 
-    IP-APACHE-SERVER STOUYAPI-SITE-NAME
+It will look like this (in my case where the stouyapi Server has IP 10.1.0.30):
+```
+127.0.0.1 localhost
+10.1.0.30 stouyapi.local
+```
 
-It will look like this (in my case where the stouyapi Server has IP 10.1.0.30)::
+> [!CAUTION]
+> The hosts file already has a line that refers to localhost and it should not be deleted. Also, you must leave a blank line after your stouyapi address.
 
-    127.0.0.1 localhost
-    10.1.0.30 stouyapi.local
+And the ouya_config.properties file, which is in /sdcard, will look like this:
+```
+OUYA_SERVER_URL=http://stouyapi.local
+OUYA_STATUS_SERVER_URL=http://stouyapi.local/api/v1/status
+```
 
-*ATTENTION: The hosts file already has a line that refers to localhost and it should not be deleted. Also, you must leave a blank line after your stouyapi address.*
-
-And the ouya_config.properties file, which is in /sdcard, will look like this::
-
-    OUYA_SERVER_URL=http://stouyapi.local
-    OUYA_STATUS_SERVER_URL=http://stouyapi.local/api/v1/status
-
-*ATTENTION: the site to be used, which in the above case is stouyapi.local, is the one that we inform in the apache configuration file, in the line that starts with "ServerName".*
+> [!CAUTION]
+> The site to be used, which in the above case is stouyapi.local, is the one that we inform in the apache configuration file, in the line that starts with "ServerName".
 
 With this, the OUYA will use the local stouyapi immediately.
 If it do not, reboot the OUYA once.
 
 
-6 - OUYA setup
-==============
+## 6 - OUYA setup
 
 1. User registration: "Existing account"
 2. Enter any username, leave password empty. Continue.

@@ -236,9 +236,7 @@ With the configuration file created and the site files in place, let's activate 
 
 First set the permissions of the new website:
 ```
-sudo adduser <username> www-data
-sudo chown -R www-data:www-data /srv/stouyapi
-sudo chmod -R g+rw /srv/stouyapi
+MORE TO COME
 ```
 
 > [!NOTE]

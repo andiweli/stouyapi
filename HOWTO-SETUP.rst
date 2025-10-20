@@ -2,8 +2,7 @@
 Building and enabling a local stouyapi
 ======================================
 
-The whole procedure was done on Linux, using Pop-OS, release Pop!_OS 22.04 LTS.
-The configuration will be the same for any Ubuntu/Debian based distro.
+The whole procedure was done on Raspbian Lite Linux on a Raspberry Pi 3 and 4.
 
 NOTE: Commands with the $ symbol mean they should be run with your default user.
 Commands with # means they must be run as root.
@@ -12,18 +11,13 @@ Commands with # means they must be run as root.
 1 - Installing the dependencies:
 ================================
 
-To build the stouyapi API and HTML files on Pop-OS you need to install the
+To build the stouyapi API and HTML files on Raspbian you need to install the
 following packages:
 
 - imagemagick
 - exiftool
 - qrencode
-- ttf-mscorefonts-installer (*)
-
-(*) Pop-OS complained about missing helvetica font, so this package is needed.
-I haven't tested it with another Helvetica compatible font package. This package
-just installs the actual font installer. A screen will appear asking you to
-accept the fonts EULA and continue with the installation.
+- ttf-mscorefonts-installer
 
 To run the server, you need to install the following packages:
 
@@ -31,9 +25,9 @@ To run the server, you need to install the following packages:
 - libapache2-mod-php
 - php-sqlite
 
-To install the packages on Pop-OS/Debian, just use the following command::
+To install the packages on Raspbian, just use the following command::
 
-    # apt install imagemagick exiftool qrencode ttf-mscorefonts-installer apache2 libapache2-mod-php php-sqlite3
+    # sudo apt install imagemagick exiftool qrencode ttf-mscorefonts-installer apache2 libapache2-mod-php php-sqlite3
 
 **ATTENTION: The above listing is not definitive and may vary if you use another
 distro such as Fedora, CentOS, etc. Make sure you have the package installed on

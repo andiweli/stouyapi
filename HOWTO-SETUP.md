@@ -130,6 +130,8 @@ Now generate the API files:
 ```
 
 Creating the files takes a while. Wait to finish.
+- On a Raspberry Pi 3 (1GB Ram) it takes up to 60 minutes
+- On a Raspberry Pi 4 (8GB Ram) it takes up to 30 minutes
 
 <img width="685" height="96" alt="image" src="https://github.com/user-attachments/assets/af0b7e99-2895-43e3-a110-4a815974d3bb" />
 

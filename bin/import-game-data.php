@@ -47,6 +47,8 @@ if (file_exists($cfgFile)) {
 }
 
 $wwwDir = __DIR__ . '/../www/';
+echo "Importing games from a OUYA game data repository...\n";
+
 
 if ($cfgEnableQr) {
     $qrDir = $wwwDir . 'gen-qr/';

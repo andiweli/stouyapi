@@ -2,7 +2,7 @@
 Building and enabling a local stouyapi
 ======================================
 
-**The whole procedure was done on Raspbian Lite Linux on a Raspberry Pi 3 and 4.**
+**The whole procedure was done on Raspbian Lite Linux on a Raspberry Pi 3 and 4. Therefore it now makes this an** *ouyaPI* 🤭
 
 *NOTE: Commands with the $ symbol mean they should be run with your default user.
 Commands with # means they must be run as root.*
@@ -205,11 +205,11 @@ Save the file and close.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
-First the permissions of the new website::
+First set the permissions of the new website::
 
 	# adduser <username> www-data
 	# chown -R www-data:www-data /srv/stouyapi
-	#  chmod -R g+rw /srv/stouyapi
+	# chmod -R g+rw /srv/stouyapi
 
 *NOTE:* ``<username>`` *is the user you're logging in to your Pi. For me it is the standard* ``pi`` *user*
 

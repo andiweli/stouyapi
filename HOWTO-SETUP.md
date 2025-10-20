@@ -1,6 +1,8 @@
-# Building and enabling a local stouyapi
+# Building stouyapi
+**A static API for the OUYA gaming console that still lets you sign in and install games, despite the OUYA server shutdown in 2019.**
 
-**The whole procedure was done on Raspbian Lite Linux on a Raspberry Pi 3 and 4. Therefore it now makes this an** *ouyaPI* 🤭
+*The whole procedure was done - mainly for personal use - on Raspbian Lite Linux on a Raspberry Pi 3 and 4.<br>
+Therefore it now makes this an* **ouyaPI** 🤭
 
 > [!NOTE]
 > You can copy/paste the needed commands. Some commands need root privileges; root commands are those beginning with *sudo*.

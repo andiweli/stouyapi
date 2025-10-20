@@ -25,7 +25,7 @@ To run the server, you need to install the following packages:
 - libapache2-mod-php
 - php-sqlite
 
-To install the packages on Raspbian, just use the following command::
+To install the packages on Raspbian, just use the following command:
 
     # sudo apt install imagemagick exiftool qrencode ttf-mscorefonts-installer apache2 libapache2-mod-php php-sqlite3
 

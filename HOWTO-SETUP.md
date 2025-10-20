@@ -46,9 +46,12 @@ sudo mkdir /srv
 
 We need permissions on this folder. To get these use:
 ```
-sudo chown pi:pi /srv
+sudo chown <username>:<username> /srv
 sudo chmod 755 /srv
 ```
+
+> [!NOTE]
+> ``<username>`` is the user you're logging in to your Pi. For me it is the standard ``pi`` user.
 
 Now first download the stouyapi code and files to your Raspberry Pi.
 
@@ -158,7 +161,9 @@ Now, look for the line that looks like below:
 #ServerName www.example.com
 ```
 
-It tells apache the address of the site. Uncomment it (remove the #) and change the address to whatever you like. Here I left it like this:
+It tells apache the address of the site.<br>
+This is usually the hostname of your Raspberry Pi - some name it ```raspberry``` some ```myserver```.<br>
+Uncomment it (remove the #) and change the address to your Pi's host name. Here I left it like this:
 ```
 ServerName stouyapi.local
 ```
@@ -168,7 +173,7 @@ Now find a line that looks like below:
 DocumentRoot /var/www/html
 ```
 
-That line basically tells apache where the site's files are. I chose to leave my files in the following path:
+That line basically tells apache where the site's files are. For our little server the files in the following path:
 ```
 DocumentRoot /srv/stouyapi/www
 ```

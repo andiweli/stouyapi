@@ -48,14 +48,15 @@ We need permissions on this folder. To get these use::
     # chmod 755 /srv
 
 Now first download the stouyapi code and files to your Raspberry Pi.
+
 Go to the new directory. We will store the OUYA data inside this folder::
 
     $ cd /srv
     $ git clone https://github.com/andiweli/stouyapi.git
 
-This will create the ``stouyapi`` inside our server files directory ``/srv``.
+This will create the ``stouyapi`` folder inside our server files directory ``/srv``.
 
-Now enter in the stouyapi directory and download the ouya-game-data code and files::
+Now enter the stouyapi directory and download the ouya-game-data code and files::
 
     $ cd stouyapi
     $ git clone https://github.com/ouya-saviors/ouya-game-data.git
@@ -80,40 +81,34 @@ If you want to edit it, open it with nano or any text editor of your choice::
 
 You should only change the following two sections:
 
-The first section is personal game recommendations within DISCOVER, below the new games listing::
+The first section is my personal game recommendations within DISCOVER, below the listing named "Favorites"::
 
-    $GLOBALS['packagelists']["cweiske's picks"] = [
-             'de.eiswuxe.blookid2',
-             'com.cosmos.babylonantwins',
-             'com.inverseblue.skyriders',
-    ];
+	$GLOBALS['packagelists']["Favorites"] = [
+	    'com.retroarch.ra32',
+	    'com.realtechvr.nogravity',
+	    'com.madfingergames.shadowgun',
+	    'com.Lightstorm3D.GeneEffect',
+	];
 
 If you want:
 
-- Change the title, cweiske's picks, keeping the double quotes,
-- Change/include a game by informing the name of the game's json file between single quotes and a comma at the end, following the same formatting as above. If you want to Delete a game, just delete the line.
+- Change the title "Favorites", keeping the double quotes,
+- Change/include a game by informing the name of the game's JSON file between single quotes and a comma at the end, following the same formatting as above. If you want to Delete a game, just delete the line.
 
-The session below are indications of games that appear on the OUYA home screen::
+The session below are indications of games that appear on the OUYA home screen at the top. I named that section "Best Rated Games"::
 
-    $GLOBALS['home']['2020 Winter GameJam'] = [
-        'com.DESKINK.ToneTests',
-        'com.Eightbbgames.yahayor',
-        'com.FuzzyPopcorn',
-        'com.NYYLE.NYCTO',
-        'com.NoelRojasOliveras.PaintKiller',
-        'com.StrawHat.Fall',
-        'com.oliverstogden.trf',
-        'com.samuelsousa.shootdestroy',
-        'com.scorpion.shootout',
-        'com.sd_game_dev.aliens_taste_my_sword',
-        'com.sumotown.sirtet',
-        'de.x2041.games.gyrogun',
-        'ht.sr.git.arcticGrind.embed',
-        'tv.ouya.demo.DarkSpacePioneer',
-        'tv.ouya.win.unity.brokenbeauty',
-    ];
+	$GLOBALS['home']['Best Rated Games'] = [
+	    'com.realtechvr.nogravity',
+	    'com.madfingergames.shadowgun',
+	    'com.fde.avpevolution',
+	    'com.Lightstorm3D.GeneEffect',
+	    'com.whitewhalegames.godofblades',
+	    'com.digitalreality.sinemora',
+	    'com.tastypoisongames.neonshadow',
+	    'com.retroarch.ra32',
+	];
 
-Edit in the same way, but note that on the home screen the title of the recommendations, 2020 Winter GameJam, is enclosed in single quotes.
+Edit in the same way, but note that on the home screen the title of the recommendations is enclosed in single quotes.
 Do not change any other field in the file and after making changes, save it.
 
 Now generate the API files::

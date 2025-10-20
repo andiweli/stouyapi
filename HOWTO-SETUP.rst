@@ -44,6 +44,11 @@ In a terminal, create a new directory by typing::
 
     # mkdir /srv
 
+We need permissions on this folder. To get these use::
+
+    # chown pi:pi /srv
+    # chmod 755 /srv
+
 Go to the new directory. We will store the OUYA data inside this folder::
 
     $ cd /srv

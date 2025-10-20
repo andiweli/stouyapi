@@ -40,10 +40,13 @@ We use the directory ``/srv`` in root as a base directory for our OUYA server fi
 
 Now first download the stouyapi code and files to your computer.
 
-In a terminal, type::
+In a terminal, create a new directory by typing::
 
     # mkdir /srv
-	$ cd /srv
+
+Go to the new directory. We will store the OUYA data inside this folder::
+
+    $ cd /srv
     $ git clone https://github.com/andiweli/stouyapi.git
 
 This will create the ``stouyapi`` inside our server files directory ``/srv``.

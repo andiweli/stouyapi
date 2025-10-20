@@ -43,7 +43,7 @@ Now first download the stouyapi code and files to your computer.
 In a terminal, type::
 
     $ cd /srv
-    $ git clone https://github.com/cweiske/stouyapi.git
+    $ git clone https://github.com/andiweli/stouyapi.git
 
 This will create the ``stouyapi`` inside our server files directory ``/srv``.
 

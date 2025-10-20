@@ -34,7 +34,7 @@ The username will appear on your ouya main screen.
 ### Apache setup
 
 > [!NOTE]
-> Step-by-step setup instructions can be found in [HOWTO-SETUP](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.rst)
+> Step-by-step setup instructions can be found in [HOWTO-SETUP](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.md)
 
 Virtual host configuration:
 

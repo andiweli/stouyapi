@@ -16,7 +16,7 @@ $opts = getopt('h', ['help', 'mini', 'noqr'], $optind);
 $args = array_slice($argv, $optind);
 
 if (isset($opts['help']) || isset($opts['h'])) {
-    echo "Import games from a OUYA game data repository\n";
+    echo "Import games from an OUYA game data repository\n";
     echo "\n";
     echo "Usage: import-game-data.php [--mini] [--noqr] [--help|-h]\n";
     echo " --mini  Generate small but ugly JSON files\n";
@@ -37,7 +37,7 @@ $cfgEnableQr = !isset($opts['noqr']);
 
 
 //default configuration values
-$GLOBALS['baseUrl']      = 'http://ouya.cweiske.de/';
+$GLOBALS['baseUrl'] = 'http://ouya.cweiske.de/';
 $GLOBALS['categorySubtitles'] = [];
 $GLOBALS['packagelists'] = [];
 $GLOBALS['urlRewrites']  = [];
@@ -47,8 +47,9 @@ if (file_exists($cfgFile)) {
 }
 
 $wwwDir = __DIR__ . '/../www/';
-echo "Importing games from a OUYA game data repository...\n";
-
+echo "Importing games from an OUYA game data repository\n";
+echo "(This may take up to 60 minutes depending on your hardware)\n";
+echo "...\n";
 
 if ($cfgEnableQr) {
     $qrDir = $wwwDir . 'gen-qr/';

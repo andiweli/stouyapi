@@ -42,7 +42,8 @@ Now first download the stouyapi code and files to your computer.
 
 In a terminal, type::
 
-    $ cd /srv
+    # mkdir /srv
+	$ cd /srv
     $ git clone https://github.com/andiweli/stouyapi.git
 
 This will create the ``stouyapi`` inside our server files directory ``/srv``.
@@ -202,7 +203,15 @@ Save the file and close.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
-First the modules, enter the following command::
+First the permissions of the new website::
+
+	# adduser <username> www-data
+	# chown -R www-data:www-data /srv/stouyapi
+	#  chmod -R g+rw /srv/stouyapi
+
+*NOTE:* ``<username>`` *is the user you're logging in to your Pi. For me it is the standard* ``pi`` *user*
+
+Second the modules, enter the following command::
 
     # a2enmod actions expires php8.4 rewrite
 
@@ -210,7 +219,7 @@ This will activate the necessary modules. Don't worry if any of them are already
 
 *NOTE: In my case PHP 8.4 was the most recent PHP version available. Check with your installation which version is installed!*
 
-It will ask to restart apache, showing the command to run which is::
+At third we restart apache, showing the command to run which is::
 
     # systemctl restart apache2
 
@@ -220,7 +229,7 @@ Finally, to activate the site, type::
 
 *NOTE: If you used another name for the site configuration file, change the name in the above command. If you just type a2ensite and press enter it will show you all the sites available to activate and you just type the name of the site and press enter.*
 
-Finally, it will ask to reload apache, which we will do with the command::
+And now to reload apache we will use the command::
 
     # systemctl reload apache2
 

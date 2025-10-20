@@ -234,9 +234,13 @@ Save the file and close.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
-First set the permissions of the new website:
+First set the permissions of the new website (not tested so far):
 ```
-MORE TO COME
+sudo groupadd ouya
+sudo usermod -aG ouya <username>
+sudo usermod -aG ouya www-data
+sudo chown -vR :ouya /srv/stouyapi/
+sudo chmod -vR g+w /srv/stouyapi/
 ```
 
 > [!NOTE]

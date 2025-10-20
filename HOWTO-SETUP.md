@@ -131,8 +131,6 @@ Now generate the API files:
 
 Creating the files takes a while. Wait to finish.
 
-<img width="765" height="97" alt="image" src="https://github.com/user-attachments/assets/26198f78-1dbb-4ab5-b04f-61f85bb0bca9" />
-
 When finished, we create the HTML files:
 ```
 ./bin/build-html.php

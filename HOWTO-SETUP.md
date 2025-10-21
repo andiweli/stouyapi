@@ -35,7 +35,7 @@ apt install imagemagick exiftool qrencode ttf-mscorefonts-installer apache2 liba
 > The above listing is not definitive and may vary if you use another distro such as Fedora, CentOS, etc. Make sure you have the package installed on your distribution.
 
 
-## 2 - Building the API and HTML files
+## 2 - Downloading and configuring the API files
 
 We use the directory ``/srv`` in root as a base directory for our OUYA server files where Apache will point to.
 
@@ -151,6 +151,7 @@ Edit in the same way, but note that on the home screen the title of the recommen
 Do not change any other field in the file and after making changes, save it.
 </details>
 
+## 3 - Building the API and HTML files
 
 Now generate the API files:
 ```
@@ -168,7 +169,7 @@ When finished, we create the HTML files:
 ./bin/build-html.php
 ```
 
-## 3 - Setting up the site
+## 4 - Setting up the site
 
 So far, apache is already running. If you type in the browser http://localhost the default apache website will appear. Now let's create the settings for the STOUYAPI.
 
@@ -258,7 +259,7 @@ In the end, disregarding all the comment lines that the file has, it will look l
 Save the file and close.
 
 
-## 4 - Activating the apache modules and the website.
+## 5 - Activating the apache modules and the website.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
@@ -327,7 +328,7 @@ curl -I http://stouyapi.local/api/v1/gamers/me
 All curl commands above should return ``HTTP/1.1 200 OK`` with some other information.
 
 
-## 5 - Configuring the files in the OUYA
+## 6 - Configuring the files in the OUYA
 
 We must access the OUYA through adb, either in the case of an installation after a factory reset or to use the local stouyapi, and edit the hosts file located in /etc (/etc/hosts) and include a line with the format below::
 ```IP-APACHE-SERVER STOUYAPI-SITE-NAME```
@@ -354,7 +355,7 @@ With this, the OUYA will use the local stouyapi immediately.
 If it do not, reboot the OUYA once.
 
 
-## 6 - OUYA setup
+## 7 - OUYA setup (not needed if swiching API servers)
 
 1. User registration: "Existing account"
 2. Enter any username, leave password empty. Continue.

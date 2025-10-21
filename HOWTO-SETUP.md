@@ -237,7 +237,7 @@ Save the file and close.
 
 With the configuration file created and the site files in place, let's activate the modules and the site.
 
-First add a new group ``ouya`` with your user and the www-data user (so Apache/PHP has full rights and you can still update the folder or access via Samba). Then set the permissions of the new website (not tested so far):
+First add a new group ``ouya`` with your user and the www-data user (so Apache/PHP has full rights and you can still update the folder or access via Samba). Then set the permissions of the new website:
 ```
 sudo groupadd ouya
 sudo usermod -aG ouya <username>

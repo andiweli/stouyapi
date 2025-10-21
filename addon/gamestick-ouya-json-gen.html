@@ -28,6 +28,7 @@
         cursor: pointer;
         font-size: 14px;
         transition: background 0.2s;
+        margin-left: 10px;
     }
     button:hover {
         background-color: #0056b3;
@@ -48,7 +49,7 @@
         display: block;
         margin-top: 10px;
     }
-    input, textarea {
+    input, textarea, select {
         width: 100%;
         padding: 7px;
         border-radius: 4px;
@@ -56,17 +57,14 @@
         margin-top: 4px;
         box-sizing: border-box;
     }
-    textarea {
-        resize: vertical;
-    }
+    textarea { resize: vertical; }
     .array-item {
         display: flex;
         gap: 5px;
         align-items: center;
+        margin-top: 5px;
     }
-    .array-item input {
-        flex: 1;
-    }
+    .array-item input { flex: 1; }
     .add-btn, .remove-btn {
         background-color: #28a745;
         color: white;
@@ -76,9 +74,7 @@
         cursor: pointer;
         font-size: 12px;
     }
-    .remove-btn {
-        background-color: #dc3545;
-    }
+    .remove-btn { background-color: #dc3545; }
 </style>
 </head>
 <body>
@@ -86,7 +82,9 @@
 <h1>Gamestick/OUYA JSON Editor</h1>
 
 <div class="actions">
-    <button type="button" onclick="saveJSON()">Save as JSON</button>
+    <input type="file" id="fileInput" accept=".json" style="display:none" onchange="loadJSON(event)">
+    <button type="button" onclick="document.getElementById('fileInput').click()">JSON öffnen</button>
+    <button type="button" onclick="saveJSON()">JSON speichern</button>
 </div>
 
 <form id="jsonForm">
@@ -94,18 +92,13 @@
     <div class="subsection">
 		<h2>game meta data</h2>
         <label>packageName</label>
-        <input type="text" id="packageName" value="com.DefiantDev.SkiSafari">
+        <input type="text" id="packageName">
 
         <label>title</label>
-        <input type="text" id="title" value="Ski Safari">
+        <input type="text" id="title">
 
         <label>description</label>
-        <textarea id="description" rows="15">Welcome to Ski Safari!
-		
-Ski Safari is where Animals, Avalanches and Action come together to create a new casual gameplay experience.
-Sven, as we like to call him, can use animals to aid his escape from an icey end.
-
-Completing objectives can 'level up' Sven and increase his score multiplier. Ride animals, perform backflips and Sven will be rocketing up the highscore table with ease.</textarea>
+        <textarea id="description" rows="15"></textarea>
 
         <label>player(s)</label>
         <div id="playersContainer"></div>
@@ -122,11 +115,11 @@ Completing objectives can 'level up' Sven and increase his score multiplier. Rid
         <div id="releasesContainer"></div>
         <button type="button" class="add-btn" onclick="addRelease()">+</button>
 
-		<h2>thumbnails/screenshots</h2>
-        <label>discover tile</label>
-        <input type="text" id="discover" value="http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/discover.png">
+		<h2>graphics</h2>
+        <label>discover</label>
+        <input type="text" id="discover">
 
-        <label>screenshots</label>
+        <label>media</label>
         <div id="mediaContainer"></div>
         <button type="button" class="add-btn" onclick="addMedia()">+</button>
     </div>
@@ -135,115 +128,109 @@ Completing objectives can 'level up' Sven and increase his score multiplier. Rid
     <div class="subsection">
         <h2>developer</h2>
         <label>name</label>
-        <input type="text" id="developer_name" value="Defiant Development">
+        <input type="text" id="developer_name">
 
         <label>website</label>
-        <input type="text" id="website" value="https://defiantdev.com/">
+        <input type="text" id="website">
 
         <h2>rating</h2>
         <label>likeCount</label>
-        <input type="number" id="rating_likeCount" value="1">
+        <input type="number" id="rating_likeCount">
 
         <label>average</label>
-        <input type="number" id="rating_average" value="5">
+        <input type="number" id="rating_average">
 
         <label>count</label>
-        <input type="number" id="rating_count" value="1">
+        <input type="number" id="rating_count">
 
         <label>contentRating</label>
-        <input type="text" id="contentRating" value="Everyone">
+        <input type="text" id="contentRating">
 
 		<h2>other details</h2>
         <label>firstPublishedAt</label>
-        <input type="datetime-local" id="firstPublishedAt" value="2012-12-13T12:00">
+        <input type="datetime-local" id="firstPublishedAt">
 
         <label>inAppPurchases</label>
         <select id="inAppPurchases">
-            <option value="false" selected>False</option>
+            <option value="false">False</option>
             <option value="true">True</option>
         </select>
 
         <label>premium</label>
         <select id="premium">
-            <option value="false" selected>False</option>
+            <option value="false">False</option>
             <option value="true">True</option>
         </select>
     </div>
 </form>
 
 <script>
-const jsonData = {
-    players: [1],
-    genres: ["Casual", "GameStick"],
-    releases: [{
-        name: "1.4.2",
-        versionCode: 0,
-        uuid: "b13b97fb4621eea4e102e962d3f77648",
-        date: "2025-10-21T10:36",
-        url: "http://gamestick.cweiske.de/archive/gamestick_com.DefiantDev.SkiSafari/Ski%20Safari_1.4.2_com.DefiantDev.SkiSafari.apk",
-        size: 35702811,
-        md5sum: "27e585d2a3dfe001f13b52336e4d8f92"
-    }],
-    media: [
-        { type: "image", url: null, thumb: "http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/screen1.png" },
-        { type: "image", url: null, thumb: "http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/screen2.png" }
-    ]
-};
-
-function createArrayInput(containerId, value) {
-    const container = document.getElementById(containerId);
+function addArrayItem(containerId, value = '') {
     const div = document.createElement("div");
     div.className = "array-item";
-    div.innerHTML = `<input type="text" value="${value}">
-                     <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
-    container.appendChild(div);
+    div.innerHTML = `
+        <input type="text" value="${value}">
+        <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
+    document.getElementById(containerId).appendChild(div);
 }
-function addArrayItem(containerId, value) {
-    createArrayInput(containerId, value);
-}
-function populateArray(containerId, data) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-    data.forEach(item => createArrayInput(containerId, item));
-}
-function addRelease(release = {}) {
-    const container = document.getElementById("releasesContainer");
+
+function addRelease(data = {}) {
     const div = document.createElement("div");
     div.className = "array-item";
     div.innerHTML = `
         <div style="flex:1">
-            <input placeholder="name" value="${release.name || ''}">
-            <input placeholder="versionCode" value="${release.versionCode || 0}">
-            <input placeholder="uuid" value="${release.uuid || ''}">
-            <input placeholder="date" type="datetime-local" value="${release.date || ''}">
-            <input placeholder="url" value="${release.url || ''}">
-            <input placeholder="size" value="${release.size || 0}">
-            <input placeholder="md5sum" value="${release.md5sum || ''}">
+            <input placeholder="name" value="${data.name || ''}">
+            <input placeholder="versionCode" value="${data.versionCode || 0}">
+            <input placeholder="uuid" value="${data.uuid || ''}">
+            <input placeholder="date" type="datetime-local" value="${data.date || ''}">
+            <input placeholder="url" value="${data.url || ''}">
+            <input placeholder="size" value="${data.size || 0}">
+            <input placeholder="md5sum" value="${data.md5sum || ''}">
         </div>
         <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
-    container.appendChild(div);
+    document.getElementById("releasesContainer").appendChild(div);
 }
-function addMedia(media = {}) {
-    const container = document.getElementById("mediaContainer");
+
+function addMedia(data = {}) {
     const div = document.createElement("div");
     div.className = "array-item";
     div.innerHTML = `
         <div style="flex:1">
-            <input placeholder="type" value="${media.type || ''}">
-            <input placeholder="url" value="${media.url || ''}">
-            <input placeholder="thumb" value="${media.thumb || ''}">
+            <input placeholder="type" value="${data.type || ''}">
+            <input placeholder="url" value="${data.url || ''}">
+            <input placeholder="thumb" value="${data.thumb || ''}">
         </div>
         <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
-    container.appendChild(div);
+    document.getElementById("mediaContainer").appendChild(div);
 }
 
-// Initialisierung der Arrays
-populateArray("playersContainer", jsonData.players);
-populateArray("genresContainer", jsonData.genres);
-jsonData.releases.forEach(r => addRelease(r));
-jsonData.media.forEach(m => addMedia(m));
+function populateForm(data) {
+    document.getElementById("packageName").value = data.packageName || '';
+    document.getElementById("title").value = data.title || '';
+    document.getElementById("description").value = data.description || '';
+    document.getElementById("discover").value = data.discover || '';
+    document.getElementById("developer_name").value = data.developer?.name || '';
+    document.getElementById("contentRating").value = data.contentRating || '';
+    document.getElementById("website").value = data.website || '';
+    document.getElementById("firstPublishedAt").value = data.firstPublishedAt || '';
+    document.getElementById("inAppPurchases").value = data.inAppPurchases ? "true" : "false";
+    document.getElementById("premium").value = data.premium ? "true" : "false";
+    document.getElementById("rating_likeCount").value = data.rating?.likeCount || '';
+    document.getElementById("rating_average").value = data.rating?.average || '';
+    document.getElementById("rating_count").value = data.rating?.count || '';
 
-function saveJSON() {
+    // Arrays
+    document.getElementById("playersContainer").innerHTML = '';
+    (data.players || []).forEach(v => addArrayItem("playersContainer", v));
+    document.getElementById("genresContainer").innerHTML = '';
+    (data.genres || []).forEach(v => addArrayItem("genresContainer", v));
+    document.getElementById("releasesContainer").innerHTML = '';
+    (data.releases || []).forEach(r => addRelease(r));
+    document.getElementById("mediaContainer").innerHTML = '';
+    (data.media || []).forEach(m => addMedia(m));
+}
+
+function gatherData() {
     const getArrayValues = id => Array.from(document.querySelectorAll(`#${id} input`)).map(i => i.value);
 
     const releases = Array.from(document.querySelectorAll("#releasesContainer > .array-item")).map(div => {
@@ -261,14 +248,10 @@ function saveJSON() {
 
     const media = Array.from(document.querySelectorAll("#mediaContainer > .array-item")).map(div => {
         const inputs = div.querySelectorAll("input");
-        return {
-            type: inputs[0].value,
-            url: inputs[1].value || null,
-            thumb: inputs[2].value
-        };
+        return { type: inputs[0].value, url: inputs[1].value || null, thumb: inputs[2].value };
     });
 
-    const data = {
+    return {
         packageName: document.getElementById("packageName").value,
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
@@ -289,12 +272,26 @@ function saveJSON() {
             count: parseInt(document.getElementById("rating_count").value)
         }
     };
+}
 
+function saveJSON() {
+    const data = gatherData();
     const blob = new Blob([JSON.stringify(data, null, 4)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = (data.packageName || "data") + ".json";
     a.click();
+}
+
+function loadJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        const json = JSON.parse(e.target.result);
+        populateForm(json);
+    };
+    reader.readAsText(file);
 }
 </script>
 

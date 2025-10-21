@@ -93,7 +93,25 @@ If you want to edit it, open it with nano or any text editor of your choice:
 nano config.php
 ```
 
-You should only change the following two sections:
+The first variable ``baseUrl`` sets the base URL for your API server.<br>
+Set it to the hostname of your Raspberry Pi. In my case ``stouyapi.local``:
+```
+$GLOBALS['baseUrl'] = 'http://stouyapi.local/';
+```
+
+The second variable ``urlRewrites`` sets an alternative URL prefix so all game JSON data will be changed from ``archive.org`` prefixes to the one you want. If you **don't** want anything to be changed and let the archive.org links, just comment the whole block with /* and */:
+```
+$GLOBALS['urlRewrites'] = [
+    '#^https://archive.org/download/#' => 'http://statics.ouya.world/ia/',
+];
+```
+
+At last you *can* change the following two sections if you need:
+
+<details>
+<summary>Recommendations within DISCOVER</summary>
+
+### DISCOVER
 
 The first section is my personal game recommendations within DISCOVER, below the listing named "Favorites":
 ```
@@ -106,9 +124,14 @@ $GLOBALS['packagelists']["Favorites"] = [
 ```
 
 If you want:
-
 - Change the title "Favorites", keeping the double quotes,
 - Change/include a game by informing the name of the game's JSON file between single quotes and a comma at the end, following the same formatting as above. If you want to Delete a game, just delete the line.
+</details>
+
+<details>
+<summary>Top Section on OUYA home screen</summary>
+
+### OUYA home screen
 
 The session below are indications of games that appear on the OUYA home screen at the top. I named that section "Best Rated Games":
 ```
@@ -126,6 +149,8 @@ $GLOBALS['home']['Best Rated Games'] = [
 
 Edit in the same way, but note that on the home screen the title of the recommendations is enclosed in single quotes.
 Do not change any other field in the file and after making changes, save it.
+</details>
+
 
 Now generate the API files:
 ```

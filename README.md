@@ -12,7 +12,7 @@ A static API for the OUYA gaming console that still lets you sign in and install
 ## Setup
 
 > [!NOTE]
-> Step-by-step setup instructions can be found in the [HOWTO-SETUP](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.md).
+> Step-by-step setup instructions specific for Raspberry Pi can be found in the [HOWTO-SETUP](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.md).
 
 
 ## Push to my OUYA

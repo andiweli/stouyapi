@@ -5,6 +5,8 @@ A static API for the OUYA gaming console that still lets you sign in and install
 > [!NOTE]
 > This is a modified repository - *mainly for personal use* - from [cweiske's stouyapi](https://github.com/cweiske/stouyapi) specifically for Raspberry Pi and Raspbian Lite OS. So I can use my own small tiny Raspberry Pi at home, modify and add my own library of [Playjam's GameStick](https://en.wikipedia.org/wiki/GameStick) games.
 
+<img width="2048" height="769" alt="image" src="https://github.com/user-attachments/assets/9cc41859-976f-475f-95e3-14ec3e349d1f" />
+
 
 ## Setup
 

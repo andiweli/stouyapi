@@ -7,6 +7,9 @@ Therefore it now makes this an* **ouyaPI** 🤭
 > [!NOTE]
 > You can copy/paste the needed commands. Some commands need root privileges; root commands are those beginning with *sudo*.
 
+<img width="2048" height="450" alt="image" src="https://github.com/user-attachments/assets/1163120d-ae16-411b-9526-a0fa7b323d51" />
+
+
 ## 1 - Installing the dependencies
 
 To build the stouyapi API and HTML files on Raspbian you need to install the following packages:

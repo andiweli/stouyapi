@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamestick/OUYA JSON Editor</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 40px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .actions {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    form {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .subsection {
+        background: #fff;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 7px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-top: 4px;
+        box-sizing: border-box;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .array-item {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .array-item input {
+        flex: 1;
+    }
+    .add-btn, .remove-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .remove-btn {
+        background-color: #dc3545;
+    }
+</style>
+</head>
+<body>
+
+<h1>Gamestick/OUYA JSON Editor</h1>
+
+<div class="actions">
+    <button type="button" onclick="saveJSON()">Save as JSON</button>
+</div>
+
+<form id="jsonForm">
+    <!-- Spalte 1 -->
+    <div class="subsection">
+		<h2>game meta data</h2>
+        <label>packageName</label>
+        <input type="text" id="packageName" value="com.DefiantDev.SkiSafari">
+
+        <label>title</label>
+        <input type="text" id="title" value="Ski Safari">
+
+        <label>description</label>
+        <textarea id="description" rows="15">Welcome to Ski Safari!
+		
+Ski Safari is where Animals, Avalanches and Action come together to create a new casual gameplay experience.
+Sven, as we like to call him, can use animals to aid his escape from an icey end.
+
+Completing objectives can 'level up' Sven and increase his score multiplier. Ride animals, perform backflips and Sven will be rocketing up the highscore table with ease.</textarea>
+
+        <label>player(s)</label>
+        <div id="playersContainer"></div>
+        <button type="button" class="add-btn" onclick="addArrayItem('playersContainer', '')">+</button>
+
+        <label>genre(s)</label>
+        <div id="genresContainer"></div>
+        <button type="button" class="add-btn" onclick="addArrayItem('genresContainer', '')">+</button>
+    </div>
+
+    <!-- Spalte 2 -->
+    <div class="subsection">
+        <h2>releases</h2>
+        <div id="releasesContainer"></div>
+        <button type="button" class="add-btn" onclick="addRelease()">+</button>
+
+		<h2>thumbnails/screenshots</h2>
+        <label>discover tile</label>
+        <input type="text" id="discover" value="http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/discover.png">
+
+        <label>screenshots</label>
+        <div id="mediaContainer"></div>
+        <button type="button" class="add-btn" onclick="addMedia()">+</button>
+    </div>
+
+    <!-- Spalte 3 -->
+    <div class="subsection">
+        <h2>developer</h2>
+        <label>name</label>
+        <input type="text" id="developer_name" value="Defiant Development">
+
+        <label>website</label>
+        <input type="text" id="website" value="https://defiantdev.com/">
+
+        <h2>rating</h2>
+        <label>likeCount</label>
+        <input type="number" id="rating_likeCount" value="1">
+
+        <label>average</label>
+        <input type="number" id="rating_average" value="5">
+
+        <label>count</label>
+        <input type="number" id="rating_count" value="1">
+
+        <label>contentRating</label>
+        <input type="text" id="contentRating" value="Everyone">
+
+		<h2>other details</h2>
+        <label>firstPublishedAt</label>
+        <input type="datetime-local" id="firstPublishedAt" value="2012-12-13T12:00">
+
+        <label>inAppPurchases</label>
+        <select id="inAppPurchases">
+            <option value="false" selected>False</option>
+            <option value="true">True</option>
+        </select>
+
+        <label>premium</label>
+        <select id="premium">
+            <option value="false" selected>False</option>
+            <option value="true">True</option>
+        </select>
+    </div>
+</form>
+
+<script>
+const jsonData = {
+    players: [1],
+    genres: ["Casual", "GameStick"],
+    releases: [{
+        name: "1.4.2",
+        versionCode: 0,
+        uuid: "b13b97fb4621eea4e102e962d3f77648",
+        date: "2025-10-21T10:36",
+        url: "http://gamestick.cweiske.de/archive/gamestick_com.DefiantDev.SkiSafari/Ski%20Safari_1.4.2_com.DefiantDev.SkiSafari.apk",
+        size: 35702811,
+        md5sum: "27e585d2a3dfe001f13b52336e4d8f92"
+    }],
+    media: [
+        { type: "image", url: null, thumb: "http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/screen1.png" },
+        { type: "image", url: null, thumb: "http://ouya.cweiske.de/game-images/gamestick/com.DefiantDev.SkiSafari/screen2.png" }
+    ]
+};
+
+function createArrayInput(containerId, value) {
+    const container = document.getElementById(containerId);
+    const div = document.createElement("div");
+    div.className = "array-item";
+    div.innerHTML = `<input type="text" value="${value}">
+                     <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
+    container.appendChild(div);
+}
+function addArrayItem(containerId, value) {
+    createArrayInput(containerId, value);
+}
+function populateArray(containerId, data) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    data.forEach(item => createArrayInput(containerId, item));
+}
+function addRelease(release = {}) {
+    const container = document.getElementById("releasesContainer");
+    const div = document.createElement("div");
+    div.className = "array-item";
+    div.innerHTML = `
+        <div style="flex:1">
+            <input placeholder="name" value="${release.name || ''}">
+            <input placeholder="versionCode" value="${release.versionCode || 0}">
+            <input placeholder="uuid" value="${release.uuid || ''}">
+            <input placeholder="date" type="datetime-local" value="${release.date || ''}">
+            <input placeholder="url" value="${release.url || ''}">
+            <input placeholder="size" value="${release.size || 0}">
+            <input placeholder="md5sum" value="${release.md5sum || ''}">
+        </div>
+        <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
+    container.appendChild(div);
+}
+function addMedia(media = {}) {
+    const container = document.getElementById("mediaContainer");
+    const div = document.createElement("div");
+    div.className = "array-item";
+    div.innerHTML = `
+        <div style="flex:1">
+            <input placeholder="type" value="${media.type || ''}">
+            <input placeholder="url" value="${media.url || ''}">
+            <input placeholder="thumb" value="${media.thumb || ''}">
+        </div>
+        <button type="button" class="remove-btn" onclick="this.parentNode.remove()">−</button>`;
+    container.appendChild(div);
+}
+
+// Initialisierung der Arrays
+populateArray("playersContainer", jsonData.players);
+populateArray("genresContainer", jsonData.genres);
+jsonData.releases.forEach(r => addRelease(r));
+jsonData.media.forEach(m => addMedia(m));
+
+function saveJSON() {
+    const getArrayValues = id => Array.from(document.querySelectorAll(`#${id} input`)).map(i => i.value);
+
+    const releases = Array.from(document.querySelectorAll("#releasesContainer > .array-item")).map(div => {
+        const inputs = div.querySelectorAll("input");
+        return {
+            name: inputs[0].value,
+            versionCode: parseInt(inputs[1].value) || 0,
+            uuid: inputs[2].value,
+            date: inputs[3].value,
+            url: inputs[4].value,
+            size: parseInt(inputs[5].value) || 0,
+            md5sum: inputs[6].value
+        };
+    });
+
+    const media = Array.from(document.querySelectorAll("#mediaContainer > .array-item")).map(div => {
+        const inputs = div.querySelectorAll("input");
+        return {
+            type: inputs[0].value,
+            url: inputs[1].value || null,
+            thumb: inputs[2].value
+        };
+    });
+
+    const data = {
+        packageName: document.getElementById("packageName").value,
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        players: getArrayValues("playersContainer").map(Number),
+        genres: getArrayValues("genresContainer"),
+        releases,
+        discover: document.getElementById("discover").value,
+        media,
+        developer: { name: document.getElementById("developer_name").value },
+        contentRating: document.getElementById("contentRating").value,
+        website: document.getElementById("website").value,
+        firstPublishedAt: document.getElementById("firstPublishedAt").value,
+        inAppPurchases: document.getElementById("inAppPurchases").value === "true",
+        premium: document.getElementById("premium").value === "true",
+        rating: {
+            likeCount: parseInt(document.getElementById("rating_likeCount").value),
+            average: parseInt(document.getElementById("rating_average").value),
+            count: parseInt(document.getElementById("rating_count").value)
+        }
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 4)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (data.packageName || "data") + ".json";
+    a.click();
+}
+</script>
+
+</body>
+</html>

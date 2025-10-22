@@ -162,7 +162,7 @@ Creating the files takes a while. Wait to finish.
 - On a Raspberry Pi 3 (1GB Ram) it takes up to 60 minutes
 - On a Raspberry Pi 4 (8GB Ram) it takes up to 30 minutes
 
-<img width="685" height="96" alt="image" src="https://github.com/user-attachments/assets/af0b7e99-2895-43e3-a110-4a815974d3bb" />
+<img width="700" height="129" alt="image" src="https://github.com/user-attachments/assets/302e9bac-cab9-4ab3-ab3a-3c4d636f3191" />
 
 When finished, we create the HTML files:
 ```

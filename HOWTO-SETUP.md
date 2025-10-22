@@ -164,6 +164,9 @@ Creating the files takes a while. Wait to finish.
 
 <img width="700" height="129" alt="image" src="https://github.com/user-attachments/assets/302e9bac-cab9-4ab3-ab3a-3c4d636f3191" />
 
+> [!IMPORTANT]
+> Unlike cweiske's original repository, my fork does NOT generate QR codes by default, as many of the websites linked there are no longer available. If you still want to have your QR code images please use the option ``--qr``.
+
 When finished, we create the HTML files:
 ```
 ./bin/build-html.php

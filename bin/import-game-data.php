@@ -20,7 +20,11 @@ if (isset($opts['help']) || isset($opts['h'])) {
     echo "\n";
     echo "Usage: import-game-data.php [--mini] [--noqr] [--help|-h]\n";
     echo " --mini  Generate small but ugly JSON files\n";
+/*  Change: per default now NO QR code images are generated
+/*  You have to manually activate it by using --qr
     echo " --noqr  Do not generate and link QR code images\n";
+*/
+    echo " --qr    Generate and link QR code images\n";
     exit(0);
 }
 
@@ -33,8 +37,7 @@ if (!is_file($foldersFile)) {
 }
 
 $cfgMini     = isset($opts['mini']);
-$cfgEnableQr = !isset($opts['noqr']);
-
+$cfgEnableQr = isset($opts['qr']);
 
 //default configuration values
 $GLOBALS['baseUrl'] = 'http://ouya.cweiske.de/';
@@ -47,9 +50,10 @@ if (file_exists($cfgFile)) {
 }
 
 $wwwDir = __DIR__ . '/../www/';
-echo "Importing games from an OUYA game data repository\n";
-echo "(This may take up to 60 minutes depending on your hardware)\n";
-echo "...\n";
+echo "> Importing games from an OUYA game data repository\n";
+echo "  Important: As by default NO QR code images are generated.\n";
+echo "  (This may take up to 60 minutes depending on your hardware)\n";
+echo "> ...\n";
 
 if ($cfgEnableQr) {
     $qrDir = $wwwDir . 'gen-qr/';

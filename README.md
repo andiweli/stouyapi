@@ -15,6 +15,14 @@ A static API for the OUYA gaming console that still lets you sign in and install
 > Step-by-step setup instructions specific for Raspberry Pi can be found in the [HOWTO-SETUP](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.md).
 
 
+## Creating new JSON game files
+
+For a convenient editing I've added a browser-based JSON editor. It can load and save the neccessary data for a game file on the OUYA.
+Game files in JSON format generated with this editor can be used when compiling the www-data in the [HOWTO (step 3 Building API and HTML files)](https://github.com/andiweli/stouyapi/blob/master/HOWTO-SETUP.md#3---building-the-api-and-html-files).
+
+<img width="1889" height="892" alt="image" src="https://github.com/user-attachments/assets/bf7e8c01-04bc-46b1-93a1-aba4fdb4b70b" />
+
+
 ## Push to my OUYA
 
 stouyapi's HTML game detail page have a "Push to my OUYA" button that allows anyone to tell his own OUYA to install that game.

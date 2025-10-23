@@ -179,7 +179,7 @@ function addRelease(data = {}) {
     div.className = "array-item";
     div.innerHTML = `
         <div style="flex:1">
-            <input placeholder="name" value="${data.name || ''}">
+            <input placeholder="version" value="${data.name || ''}">
             <input placeholder="versionCode" value="${data.versionCode || 0}">
             <input placeholder="uuid" value="${data.uuid || ''}">
             <input placeholder="date" type="datetime-local" value="${data.date || ''}">
